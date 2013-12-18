@@ -22,7 +22,7 @@ module.exports = function(grunt) {
       },
       basic_and_extras: {
         files: {
-          'js/plugins.js': ['js/extra/*.js', 'js/plugins/*.js']
+          'js/plugins.js': ['js/**/*.js']
         }
       }
     },

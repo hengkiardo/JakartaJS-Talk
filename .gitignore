@@ -15,6 +15,7 @@ node_modules
 resources
 resource
 build
+js/components/
 
 ## OS X
 .DS_Store
