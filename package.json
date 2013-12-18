@@ -5,11 +5,13 @@
   "dependencies": {
     "express": "~3.4.4",
     "mime": "latest",
-    "gzippo": "latest",
-    "nodemailer": "*",
-    "jade": "~0.35.0"
+    "gzippo": "latest"
   },
   "engines": {
     "node": "~0.10.x"
   },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-concat": "~0.3.0"
+  }
 }
