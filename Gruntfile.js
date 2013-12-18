@@ -16,7 +16,14 @@ module.exports = function(grunt) {
       }
     },
     clean: {
-      dev: ["js/plugins.js"]
+      dev: ["js/plugins.js","css/style.css","js/main.min.js"]
+    },
+    uglify: {
+      js: {
+        files: {
+          'js/main.min.js': ['js/plugins.js','js/main.js']
+        }
+      }
     },
     recess: {
       dev: {
@@ -41,7 +48,8 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-recess');
 
-  grunt.registerTask('dev', ['clean', 'concat', 'recess:dev']);
+  grunt.registerTask('dev', ['clean', 'concat', 'uglify' , 'recess:dev']);
 };
