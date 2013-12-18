@@ -16,6 +16,7 @@ resources
 resource
 build
 js/components/
+bower
 
 ## OS X
 .DS_Store

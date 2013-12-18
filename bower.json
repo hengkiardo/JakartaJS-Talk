@@ -1,0 +1,28 @@
+{
+  "name": "JakartaJS-Talk",
+  "main": "jakartaJS-Talk.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/aredo/JakartaJS-Talk",
+  "authors": [
+    "Hengkiardo <hengki.sihombing@gmail.com>"
+  ],
+  "description": "Grunt and Bower",
+  "keywords": [
+    "gruntjs",
+    "bower",
+    "jakartaJS"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery": "~2.0.3",
+    "bootstrap": "3.0.3",
+    "modernizr": "~2.7.1"
+  }
+}
