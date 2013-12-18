@@ -14,10 +14,14 @@ module.exports = function(grunt) {
           'js/main.js': ['js/frontend/main.js']
         }
       }
+    },
+    clean: {
+      dev: ["js/plugins.js"]
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
-  grunt.registerTask('dev', ['concat']);
+  grunt.registerTask('dev', ['clean:dev','concat']);
 };
