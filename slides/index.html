@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Grunt.js - Less Painful Than You Might Think</title>
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="slides/css/reveal.min.css">
+        <link rel="stylesheet" href="slides/css/theme/solarized.css" id="theme">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="slides/lib/css/zenburn.css">
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="slides/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="slides/lib/js/html5shiv.js"></script>
+        <![endif]-->
+        
+        <!-- SHUT UP SHUT UP SHUT UP -->
+        <style>
+        .reveal section img.puppy {
+            max-height: 400px;
+        }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h1>GruntJS and Bower.IO</h1>
+                    <h3>KICKSTART YOUR FRONTEND DEVELOPMENT</h3>
+                    
+                    <img src="slides/images/grunt.png">
+                    <img src="slides/images/bower.png" width="400">
+                    
+                    <p>
+                        <small> 
+                            <a style="font-size:30px" href="http://hengkiardo.com">Hengki Sihombing</a> <br />
+                            Twitter : <a href="http://twitter.com/helloandre">@hengkiardo</a>
+                            &nbsp; &nbsp; Github : <a href="http://github.com/aredo">@aredo</a>
+                        </small>
+                    </p>
+                </section>
+
+                <section>
+                    <h1>What is Bower</h1>
+                    <img src="slides/images/bower.png" width="250">
+                    <p>A package manager for the web By Twitter</p>
+
+                    <p>Bower depends on Node and NPM</p>
+                    <pre><code class="bash">npm install -g bower</code></pre>
+                </section>
+
+                <section>
+                    <h2 style="text-transform:none">Bower can be configured using JSON in a <strong style="color:red">.bowerrc</strong> file</h2>
+                    <pre><code class="json">
+                         {
+                              "directory": "app/components",
+                              "json": "bower.json" // Add this line
+                          }
+                    </code></pre>
+                </section>
+
+                <!-- Example of nested vertical slides -->
+                <section>
+                    <h1>What Is Grunt?</h1>
+                    
+                    <img src="slides/images/grunt.png">
+                    
+                    <p>Automated tasks written in javascript for javascript <small>*</small></p>
+                    <small>* among other things</small>
+                </section>
+
+                <section>
+                    <h1>Before Grunt?</h1>
+                    <ul>
+                        <li>
+                            <strong>Rakefile</strong>
+                            <ul>
+                                <li>Not Terrible</li>
+                                <li>NOT A RUBY TALK</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Makefile,</strong>
+                            <ul>
+                                <li>- Horrendous DSL</li>
+                                <li>+ Incremental</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Apache Ant</strong>
+                            <ul>
+                                <li>written in XML</li>
+                                <li>NOT A JAVA TALK</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Maven, Gradle, etc</strong>
+                        </li>
+                </section>
+
+                <section>
+                    <h1>Ok, Impress Me</h1>
+                    
+                    <p>Compile Anything, Lint Code, Watch For Changes, Run Tests, Build Zips, Deploying, Upload FTP/SFTP, Run Shell Script.</p>
+                    <p>Running on top NodeJS</p>
+                    <p>Lots of plugins for front-end and Node development</p>
+                    <img src="slides/images/statistic-npm.png">
+                    
+                </section>
+
+                <section>
+                    <h1>Stop Stalling</h1>
+                    <small>we want puppies</small>
+                    <h3>What This Talk Covers</h3>
+                    
+                    <ol>
+                        <li>Starting</li>
+                        <li>Simple Tasking</li>
+                        <li>Multi Tasking</li>
+                        <li>Watching</li>
+                        <li>Slightly Difficult Tasking</li>
+                        <li>Other People's Things</li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h2>Installing</h2>
+                    
+                    <pre><code class="bash">npm install -g grunt-cli
+npm install grunt --save-dev</code></pre>
+                    
+                    <p>package.json</p>
+                    <pre><code>{
+    "name": "grunte-talk",
+    "version": "0.1.0",
+    "devDependencies": {
+        "grunt": "~0.4.2"
+    }
+}</code></pre>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>Puppy One</h1>
+                        <h3>Uglify Javascript</h3>
+                        <p>
+                            <img class="puppy" src="slides/images/puppies/one.jpg">
+                        </p>
+                        <small>follow along at home: puppies/one/</small>
+                    </section>
+                    
+                    <section>
+                        <p>package.json</p>
+                        <pre><code>{
+    "name": "puppyone",
+    "version": "0.1.0",
+    "devDependencies": {
+        "grunt": "~0.4.1",
+        "grunt-contrib-uglify": "~0.2.4"
+    }
+}</code></pre>
+                    </section>
+                    
+                    <section>
+                        <p>Gruntfile.js</p>
+                        <pre><code>module.exports = function(grunt) {
+    grunt.initConfig({
+        uglify: {
+            simple: {
+                files: {
+                    'build/app.min.js': ['src/jquery.js', 'src/app.js']
+                }
+            }
+        } 
+    });
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+};</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h3>Command</h3>
+                        <pre><code>grunt uglify</code></pre>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>Puppy Two</h1>
+                        <h3><% pkg.first %> verse, same as <% pkg.first %></h3>
+                        <p>
+                            <img class="puppy" src="slides/images/puppies/two.jpg">
+                        </p>
+                        <small>follow along at home: puppies/two/</small>
+                    </section>
+                    
+                    <section>
+                    
+                        <p>package.json</p>
+                        <pre><code>{
+    "name": "puppytwo",
+    "version": "0.1.0",
+    "devDependencies": {
+        "grunt": "~0.4.1",
+        "grunt-contrib-uglify": "~0.2.4",
+    },
+    "srcpath": "src/",
+    "destpath": "public/"
+}</code></pre>
+                    </section>
+                    
+                    <section>
+                        <p>Gruntfile.js</p>
+                        <pre><code class="javascript">module.exports = function(grunt) {
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+        uglify: {
+            simple: {
+                files: {
+                    '<%= pkg.destpath %>app.min.js': ['<%= pkg.srcpath %>app.js']
+                }
+            }
+        } 
+    });
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+};</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h3>Command</h3>
+                        <pre><code>grunt uglify</code></pre>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>Puppy Three</h1>
+                        <h3>Much Grunts</h3>
+                        <p>
+                            <img class="puppy" src="slides/images/puppies/three.jpg">
+                        </p>
+                        <small>follow along at home: puppies/three/</small>
+                    </section>
+                    
+                    <section>
+                    
+                        <p>package.json</p>
+                        <pre><code>{
+    "name": "puppythree",
+    "version": "0.1.0",
+    "devDependencies": {
+        "grunt": "~0.4.1",
+        "grunt-contrib-less": "~0.8.1",
+        "grunt-contrib-cssmin": "~0.6.2"
+    },
+    "srcpath": "src/",
+    "destpath": "public/"
+}</code></pre>
+                    </section>
+                    
+                    <section>
+                        <p>Gruntfile.js</p>
+                        <pre><code class="javascript">module.exports = function(grunt) {
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+        less: {
+            simple: {
+                files: {
+                    '<%= pkg.srcpath %>css/bootstrap.css': [
+                        '<%= pkg.srcpath %>less/bootstrap.less'
+                    ]
+                }
+            }
+        },
+        cssmin: {
+            simple: {
+                files: {
+                    '<%= pkg.destpath %>css/bootstrap.min.css': [
+                        '<%= pkg.srcpath %>css/bootstrap.css'
+                    ]
+                }
+            }
+        }
+    });
+    grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.registerTask('default', ['less', 'cssmin']);
+};</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h3>Command</h3>
+                        <pre><code>grunt</code></pre>
+                    </section>
+                </section>
+                
+                <section>
+                    <section>
+                        <h1>Puppy Six</h1>
+                        <h3>Hold On To Your Butts</h3>
+                        <p>
+                            <img class="puppy" src="slides/images/puppies/six.jpg">
+                        </p>
+                        <small>follow along at home: puppies/six/ (if you dare)</small>
+                    </section>
+                    
+                    <section>
+                        <h1>Node.js at DeviantART</h1>
+                        <h3>PHP + Node.js == Jenny Craig</h3>
+                        <p>
+                            <img src="slides/images/jc.png">
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h1>Let's build our own</h1>
+                        <h3>Grunt.js == Hunter</h3>
+                        <pre><code>var hunter = require('./lib/hunter'),
+hunted = hunter.hunt(grunt.config('pkg'));</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h3>List Files</h3>
+                        <p>We're in Node, let's use JSON</p>
+                        <p>list/js/base.js.json</p>
+                        <pre><code>{
+    "type": "static",
+    "files": [
+        "src/js/lib/jquery.js",
+        "src/js/lib/underscore.js",
+        "src/js/lib/backbone.js"
+    ]
+}</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h3>Set Config</h3>
+                        <p>
+                            Use <code>hunted.js</code> genertated by <code>hunter.hunt()</code> to tell <code>uglify</code> what to build and where to put it
+                        </p>
+                        <pre><code>grunt.config.set('uglify', hunted.js);</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h1>Confession:</h1>
+                        <p>This ended up being a bit too complicated.</p>
+                        <p>Could do a whole talk just about Hunter</p>
+                    </section>
+                </section>
+                
+                <section>
+                    <section>
+                        <h1>Slightly More Useful Things</h1>
+                        <p><a href="http://yeoman.io">Yeoman</a> - <a href="http://bower.io">Bower</a> - <a href="http://assemble.io">Assemble</a></p>
+                    </section>
+                    
+                    <section>
+                        <h3>Yeoman</h3>
+                        <p>
+                            <img src="slides/images/yeoman.png">
+                        </p>
+                        <p>Scaffolding workflows</p>
+                    </section>
+                    
+                    <section>
+                        <h3>Bower</h3>
+                        <p>
+                            <img src="slides/images/bower.png">
+                        </p>
+                        <p>Kinda Package Management</p>
+                    </section>
+                    
+                    <section>
+                        <h3>Assemble</h3>
+                        <p>
+                            <img src="slides/images/assemble.png">
+                        </p>
+                        <p>Static site generator for kids who are too cool for Jekyll</p>
+                    </section>
+                </section>
+                
+                <section>
+                    <h1>Questions?</h1>
+                </section>
+                
+                <section>
+                    <h1>You Suck At Explaining</h1>
+                    <p>Documentation from people who know way more than me (read: the people that wrote the damn things)</p>
+                    <ul>
+                        <li>
+                            <a href="http://gruntjs.com/getting-started">Grunt</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/gruntjs/grunt-contrib-uglify#getting-started">Grunt - Uglify</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/gruntjs/grunt-contrib-less#getting-started">Grunt - Less</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/gruntjs/grunt-contrib-cssmin#getting-started">Grunt - CSSMin</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/gruntjs/grunt-contrib-cssmin#getting-started">Grunt - Watch</a>
+                        </li>
+                    </ul>
+                </section>
+
+            </div>
+
+        </div>
+
+        <script src="slides/lib/js/head.min.js"></script>
+        <script src="slides/js/reveal.min.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'slides/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'slides/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'slides/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                ]
+            });
+
+        </script>
+
+    </body>
+</html>
