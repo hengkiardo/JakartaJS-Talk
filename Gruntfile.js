@@ -15,8 +15,18 @@ module.exports = function(grunt) {
         }
       }
     },
+    watch: {
+      styles: {
+        files: ['js/main.js', 'js/**/*.js', 'css/*.less'],
+        tasks: ['recess:dev', 'concat:basic_and_extras'],
+        options: {
+          nospawn: true
+        }
+      }
+    },
     clean: {
-      dev: ["js/plugins.js","css/style.css","js/main.min.js"]
+      dev: ["js/plugins.js","css/style.css","js/main.min.js"],
+      build: ["js/plugins.js","css/style.css","js/main.min.js"]
     },
     uglify: {
       js: {
@@ -49,7 +59,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-recess');
 
-  grunt.registerTask('dev', ['clean', 'concat', 'uglify' , 'recess:dev']);
+  grunt.registerTask('dev', ['clean:dev', 'concat', 'recess:dev', 'watch']);
+  grunt.registerTask('prod', ['clean', 'concat', 'uglify' , 'recess:build']);
 };
