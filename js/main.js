@@ -1,0 +1,7 @@
+$(window).load(function() {
+  
+});
+
+$(function(){
+
+});

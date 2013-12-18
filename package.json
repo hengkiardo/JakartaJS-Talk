@@ -1,0 +1,15 @@
+{
+  "name": "portal",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "express": "~3.4.4",
+    "mime": "latest",
+    "gzippo": "latest",
+    "nodemailer": "*",
+    "jade": "~0.35.0"
+  },
+  "engines": {
+    "node": "~0.10.x"
+  }
+}
